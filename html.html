@@ -1,0 +1,131 @@
+\<!DOCTYPE html>
+<html lang="hy">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ՀԱՅBLOX - Հայկական Խաղային Հարթակ</title>
+<link rel="stylesheet" href="css.css">
+</head>
+<body>
+
+<!-- ===== LOGIN SCREEN ===== -->
+<div id="loginScreen" class="screen active">
+  <div class="login-container">
+    <div class="logo-title">ՀԱՅBLOX</div>
+    <div class="logo-subtitle">Հայկական Խաղային Հարdelays · Armenian Gaming Platform</div>
+    <input type="text" id="usernameInput" placeholder="🎮 Enter username" maxlength="16">
+    <input type="password" id="passwordInput" placeholder="🔒 Password (any)">
+    <button class="btn-play btn-primary" onclick="doLogin()">ՄՈՒՏՔ ԳՈՐԾԵԼ — PLAY ▶</button>
+    <div class="flag-bar">
+      <div class="flag-r"></div>
+      <div class="flag-b"></div>
+      <div class="flag-o"></div>
+    </div>
+    <div class="login-footer">🏔️ <span>Powered by Mount Ararat</span> — v1.0.0</div>
+  </div>
+</div>
+
+<!-- ===== LOBBY SCREEN ===== -->
+<div id="lobbyScreen" class="screen">
+  <div class="top-bar">
+    <div class="top-logo">ՀԱՅBLOX</div>
+    <div style="display:flex;align-items:center;gap:20px;">
+      <div class="currency-badge">💰 <span id="coinDisplay">1,000</span> Դdelays</div>
+      <div class="top-user">
+        <div>
+          <div class="user-name" id="displayName">Player</div>
+          <div class="user-coins">🌟 Level 1</div>
+        </div>
+        <div class="user-avatar" id="userAvatarSmall">P</div>
+      </div>
+    </div>
+  </div>
+  <div class="lobby-content">
+    <div class="sidebar">
+      <div class="sidebar-item active" onclick="showSection('discover', this)">
+        <span class="icon">🏠</span> Home
+      </div>
+      <div class="sidebar-item" onclick="showSection('discover', this)">
+        <span class="icon">🔍</span> Discover
+      </div>
+      <div class="sidebar-item" onclick="showAvatar()">
+        <span class="icon">👤</span> Avatar
+      </div>
+      <div class="sidebar-item" onclick="showSection('discover', this)">
+        <span class="icon">🏪</span> Shop
+      </div>
+      <div class="sidebar-item" onclick="showSection('discover', this)">
+        <span class="icon">👥</span> Friends
+      </div>
+      <div class="sidebar-item" onclick="showSection('discover', this)">
+        <span class="icon">⚙️</span> Settings
+      </div>
+    </div>
+    <div class="main-content">
+      <h2>🔥 Հայտdelays Խdelays — Popular Games</h2>
+      <p class="section-sub">Explore Armenian-themed adventures!</p>
+      <div class="games-grid" id="gamesGrid"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== GAME SCREEN ===== -->
+<div id="gameScreen" class="screen">
+  <div class="game-top-bar">
+    <button class="btn-back" onclick="exitGame()">← Ետ — Back</button>
+    <div style="font-weight:800;font-size:15px;" id="gameTitle">Game</div>
+    <div class="game-hud">
+      <div class="hud-item">❤️ <span id="healthDisplay">100</span></div>
+      <div class="hud-item">💰 <span id="gameCoins">0</span></div>
+      <div class="hud-item">⏱️ <span id="gameTime">0:00</span></div>
+    </div>
+  </div>
+  <div style="position:relative;flex:1;overflow:hidden;">
+    <canvas id="gameCanvas"></canvas>
+
+    <!-- Chat Panel -->
+    <div class="chat-panel" id="chatPanel">
+      <div class="chat-messages" id="chatMessages"></div>
+      <div class="chat-input-bar">
+        <input type="text" id="chatInput" placeholder="Say something..." maxlength="100"
+               onkeypress="if(event.key==='Enter')sendChat()">
+        <button onclick="sendChat()">Send</button>
+      </div>
+    </div>
+
+    <!-- Player List -->
+    <div class="player-list" id="playerList"></div>
+
+    <!-- Controls Hint -->
+    <div class="controls-hint">
+      <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> Move<br>
+      <kbd>Space</kbd> Jump<br>
+      <kbd>Shift</kbd> Run<br>
+      <kbd>E</kbd> Collect
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="gameLoading">
+      <div class="loader-spinner"></div>
+      <div class="loader-text">Loading Game...</div>
+      <div class="loader-sub">Connecting to Armenian servers 🏔️</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== AVATAR MODAL ===== -->
+<div class="modal-overlay" id="avatarModal">
+  <div class="modal" style="position:relative;">
+    <button class="modal-close" onclick="closeAvatar()">✕</button>
+    <h2>👤 Customize Avatar</h2>
+    <p style="color:#888;font-size:13px;margin-bottom:15px;">Choose your character</p>
+    <div class="avatar-picker" id="avatarPicker"></div>
+    <p style="color:#888;font-size:13px;margin-bottom:10px;">Color Theme</p>
+    <div class="color-picker" id="colorPicker"></div>
+    <button class="btn-play btn-primary" onclick="saveAvatar()">Save & Close</button>
+  </div>
+</div>
+
+<script src="js.js"></script>
+</body>
+</html>
